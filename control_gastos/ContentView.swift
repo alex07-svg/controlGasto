@@ -129,6 +129,22 @@ struct ContentView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("Control de Gastos")
             .toolbar {
+                // MARK: - Botón Exportar Reporte
+                ToolbarItem(placement: .topBarLeading) {
+                    ShareLink(
+                        item: viewModel.generateMonthlyReportCSV(),
+                        preview: SharePreview(
+                            "Reporte Mensual",
+                            image: Image(systemName: "chart.bar.doc.horizontal")
+                        )
+                    ) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.body)
+                    }
+                    .accessibilityLabel("Exportar reporte en CSV")
+                }
+
+                // MARK: - Botón Agregar Movimiento
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showingAddSheet = true

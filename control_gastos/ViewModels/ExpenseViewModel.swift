@@ -87,6 +87,41 @@ final class ExpenseViewModel {
         .sorted { $0.amount > $1.amount }
     }
 
+    // MARK: - Exportación de Reportes (CSV)
+
+    /// Genera un objeto CSVFile con el reporte detallado del mes seleccionado listo para compartir.
+    func generateMonthlyReportCSV() -> CSVFile {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: selectedMonth)
+        let year = calendar.component(.year, from: selectedMonth)
+        let filename = "Reporte_Gastos_\(year)_\(String(format: "%02d", month)).csv"
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        var csv = "Fecha,Tipo,Categoría,Título,Monto,Nota\n"
+
+        for item in monthlyTransactions {
+            let formattedDate = dateFormatter.string(from: item.date)
+            let type = item.type.rawValue
+            let category = item.category.displayName
+            let title = "\"\(item.title.replacingOccurrences(of: "\"", with: "\"\""))\""
+            let amount = String(format: "%.2f", item.amount)
+            let note = "\"\(item.note.replacingOccurrences(of: "\"", with: "\"\""))\""
+
+            csv.append("\(formattedDate),\(type),\(category),\(title),\(amount),\(note)\n")
+        }
+
+        // Resumen al final del reporte
+        csv.append("\n")
+        csv.append("Resumen del Mes\n")
+        csv.append("Ingresos Totales:,\(String(format: "%.2f", totalIncome))\n")
+        csv.append("Gastos Totales:,\(String(format: "%.2f", totalExpenses))\n")
+        csv.append("Balance Neto:,\(String(format: "%.2f", netBalance))\n")
+
+        return CSVFile(content: csv, filename: filename)
+    }
+
     // MARK: - Acciones (CRUD)
 
     /// Agrega una nueva transacción a la lista

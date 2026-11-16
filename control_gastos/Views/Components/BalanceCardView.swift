@@ -83,8 +83,8 @@ struct BalanceCardView: View {
             HStack(spacing: 12) {
                 // Tarjeta Ingresos
                 HStack(spacing: 10) {
-                    Image(systemName: "arrow.down.left.circle.fill")
-                        .font(.title2)
+                    Image(systemName: "plus")
+                        .font(.title)
                         .foregroundStyle(.green)
 
                     VStack(alignment: .leading, spacing: 2) {
@@ -108,8 +108,8 @@ struct BalanceCardView: View {
 
                 // Tarjeta Gastos
                 HStack(spacing: 10) {
-                    Image(systemName: "arrow.up.right.circle.fill")
-                        .font(.title2)
+                    Image(systemName: "minus")
+                        .font(.title)
                         .foregroundStyle(.red)
 
                     VStack(alignment: .leading, spacing: 2) {
