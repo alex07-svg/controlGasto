@@ -16,6 +16,7 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     case health = "Salud"
     case services = "Servicios"
     case shopping = "Compras"
+    case travel = "Viajes"
     case otherExpense = "Otros gastos"
 
     // Ingresos
@@ -33,7 +34,7 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     /// Tipo de movimiento al que pertenece comúnmente la categoría
     var defaultType: TransactionType {
         switch self {
-        case .food, .transport, .housing, .entertainment, .health, .services, .shopping, .otherExpense:
+        case .food, .transport, .housing, .entertainment, .health, .services, .shopping, .travel, .otherExpense:
             return .expense
         case .salary, .freelance, .investments, .gifts, .otherIncome:
             return .income
@@ -57,6 +58,8 @@ enum Category: String, CaseIterable, Codable, Identifiable {
             return "bolt.fill"
         case .shopping:
             return "bag.fill"
+        case .travel:
+            return "airplane.circle.fill"
         case .otherExpense:
             return "creditcard.fill"
         case .salary:
@@ -89,6 +92,8 @@ enum Category: String, CaseIterable, Codable, Identifiable {
             return .yellow
         case .shopping:
             return .cyan
+        case .travel:
+            return .red
         case .otherExpense:
             return .gray
         case .salary:

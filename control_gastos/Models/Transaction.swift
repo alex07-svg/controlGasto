@@ -46,6 +46,7 @@ struct Transaction: Identifiable, Codable, Equatable {
 }
 
 // MARK: - Datos de prueba (Mock Data)
+
 extension Transaction {
     static let samples: [Transaction] = [
         Transaction(
@@ -98,3 +99,4 @@ extension Transaction {
         )
     ]
 }
+
